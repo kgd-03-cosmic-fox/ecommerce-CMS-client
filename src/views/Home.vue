@@ -6,56 +6,56 @@
           <div class="row">
             <b-card
               title="No Stock"
-              class="col-3 mr-3 ml-auto shadow p-3 mb-5 bg-white rounded"
+              class="col-3 mr-3 ml-auto shadow p-3 mb-5 bg-white"
             >
-              <b-card-text>Product : ProductValue (with stock = 0)</b-card-text>
-              <b-button href="#" variant="primary">Restock Product</b-button>
+              <b-card-text>Product : {{noStock}}</b-card-text>
+              <b-button href="#" variant="primary"  class="box-rounding button-card">Restock Product</b-button>
             </b-card>
 
             <b-card
               title="All Stock"
-              class="col-3 mr-3 shadow p-3 mb-5 bg-white rounded"
+              class="col-3 mr-3 shadow p-3 mb-5 bg-white"
               style="title.background-color:red"
             >
-                <b-card-text>Product : AllProductValue | All Stock : StockValue</b-card-text>
-              <b-button href="#" variant="primary">See All Product</b-button>
+                <b-card-text>Product : {{dataProducts.length}} | All Stock : {{productsStock}}</b-card-text>
+              <b-button variant="primary"  class="box-rounding button-card">See All Product</b-button>
             </b-card>
 
             <b-card
               title="Ready Stock"
-              class="col-3 mr-auto shadow p-3 mb-5 bg-white rounded"
+              class="col-3 mr-auto shadow p-3 mb-5 bg-white"
             >
-              <b-card-text>Product : ProductValue (with stock > 0)</b-card-text>
-              <b-button href="#" variant="primary">See Product</b-button>
+              <b-card-text>Product : {{readyStock}}</b-card-text>
+              <b-button variant="primary"  class="box-rounding button-card">See Product</b-button>
             </b-card>
 
           </div>
         </div>
 
-        <div class="container col-9 mt-3">
+        <div class="container col-9 mt-5">
           <div class="row">
             <b-card
               title="Less Than Average"
-              class="col-3 mr-3 ml-auto shadow p-3 mb-5 bg-white rounded"
+              class="col-3 mr-3 ml-auto shadow p-3 mb-5 bg-white"
             >
-              <b-card-text>Less Than Average : Value Products</b-card-text>
-              <b-button href="#" variant="primary">See Product</b-button>
+              <b-card-text>Below Average Price : {{belowAvgPrice}} Products</b-card-text>
+              <b-button variant="primary"  class="box-rounding">See Product</b-button>
             </b-card>
 
             <b-card
               title="Average Price"
-              class="col-3 mr-3 shadow p-3 mb-5 bg-white rounded"
+              class="col-3 mr-3 shadow p-3 mb-5 bg-white"
               style="title.background-color:red"
             >
-              <b-card-text>Average Price : AverageValue</b-card-text>
+              <b-card-text>Average Price : {{avgPrice}}</b-card-text>
             </b-card>
 
             <b-card
               title="Greater Than Average"
-              class="col-3 mr-auto shadow p-3 mb-5 bg-white rounded"
+              class="col-3 mr-auto shadow p-3 mb-5 bg-white"
             >
-              <b-card-text>Greater Than Average : Value Products</b-card-text>
-              <b-button href="#" variant="primary">See Product</b-button>
+              <b-card-text>Above Average Price: {{aboveAvgPrice}} Products</b-card-text>
+              <b-button variant="primary"  class="box-rounding button-card">See Product</b-button>
             </b-card>
           </div>
         </div>
@@ -71,6 +71,75 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  data () {
+    return {
+
+    }
+  },
+  computed: {
+    dataProducts () {
+      return this.$store.state.products
+    },
+    productsStock () {
+      let totalStocks = 0
+      for (let i = 0; i < this.dataProducts.length; i++) {
+        totalStocks += this.dataProducts[i].stock
+      }
+      return totalStocks
+    },
+    readyStock () {
+      let productReady = 0
+
+      for (let i = 0; i < this.dataProducts.length; i++) {
+        if (this.dataProducts[i].stock > 0) {
+          productReady += 1
+        }
+      }
+      return productReady
+    },
+    noStock () {
+      let productNoReady = 0
+
+      for (let i = 0; i < this.dataProducts.length; i++) {
+        if (this.dataProducts[i].stock === 0) {
+          productNoReady += 1
+        }
+      }
+      return productNoReady
+    },
+    avgPrice () {
+      let averagePrice = 0
+      let totalPrice = 0
+      for (let i = 0; i < this.dataProducts.length; i++) {
+        totalPrice += this.dataProducts[i].price
+      }
+
+      averagePrice = totalPrice / this.dataProducts.length
+      return averagePrice
+    },
+    belowAvgPrice () {
+      let belowProduct = 0
+
+      for (let i = 0; i < this.dataProducts.length; i++) {
+        if (this.dataProducts[i].price < this.avgPrice) {
+          belowProduct += 1
+        }
+      }
+
+      return belowProduct
+    },
+    aboveAvgPrice () {
+      let aboveProduct = 0
+
+      for (let i = 0; i < this.dataProducts.length; i++) {
+        if (this.dataProducts[i].price >= this.avgPrice) {
+          aboveProduct += 1
+        }
+      }
+
+      return aboveProduct
+    }
+  }
 }
 </script>

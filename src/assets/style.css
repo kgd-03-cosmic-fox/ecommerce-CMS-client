@@ -1,17 +1,16 @@
 body{
     height: 100vh;
-    width: 100vw;    
+    width: 100vw;
 }
 
 .box-login{
-    margin: auto;    
+    margin: 10% auto 0 auto;    
     width: 500px;
     height: 500px;
 }
 
 .form-login{
     height: 100%;
-    margin-top: 50%;
     padding-top: 30%;    
 }
 
@@ -53,3 +52,84 @@ body{
 .form-login h1{ 
     margin-top: 23%;
 }
+
+.router{
+    margin-bottom: 10px;
+    font-size: 30px;
+    border: 5px skyblue groove;
+}
+
+.router:nth-child(1){
+    margin-top: 20%;
+}
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  #nav {
+
+    padding: 30px;
+    height: 100vh;
+  }
+  
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: left;
+  }
+  
+  #nav a.router-link-exact-active {
+    background-color: #42b983;
+  }
+
+  .view-side{
+    margin-top: 5%;
+  }
+
+  .table-product img{
+    width: 50px;
+    height: 50px;
+  }
+
+  .table-product tbody{
+    font-size: 16px;
+  }
+
+  .table th , .table td{
+      vertical-align: middle !important;
+  }
+
+  .table-of-products{
+      margin-top: 2%;
+  }
+
+  .table-box{
+      height: 65vh;
+      width: 100%;
+      overflow: scroll;
+  }
+
+  .bi{
+      width: 20px !important;
+      height: 20px !important;
+  }
+
+  .bi:hover{
+    width: 30px !important;
+    height: 30px !important;
+    cursor: pointer;
+  }
+
+  .button-add-product{
+    margin-right: 0;
+    margin-left: 90%;
+  }
+
+  .box-rounding{
+    border-radius: 75px !important;
+  }

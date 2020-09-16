@@ -20,7 +20,9 @@
                   </div>
                   <div>
                     <button type="button"
-                    class="btn btn-primary">
+                    class="btn btn-primary"
+                    v-on:click="Login"
+                    >
                     Login
                     </button>
                   </div>
@@ -31,14 +33,42 @@
 </template>
 
 <script>
+import ProductsAPI from '../api/productsAPI'
 export default {
   name: 'Login',
   data () {
     return {
       login: {
-        email: '',
-        password: ''
+        email: 'admin@email.com',
+        password: '1234'
       }
+    }
+  },
+  methods: {
+    Login () {
+      ProductsAPI({
+        method: 'post',
+        url: 'login',
+        data: {
+          email: this.login.email,
+          password: this.login.password
+        }
+      })
+        .then(({ data }) => {
+          localStorage.setItem('access_token', data.access_token)
+          this.$store.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  computed: {
+    count () {
+      return this.$store.state.count
+    },
+    dataProducts () {
+      return this.$store.state.products
     }
   }
 }

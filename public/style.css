@@ -1,0 +1,25 @@
+.login-page{
+  display:flex;
+  /* background-color:green; */
+}
+/* .navbar{
+  text-align: center !important;
+} */
+.card-color-grey{
+  background-color: grey;
+}
+.side-menu-margin{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.on-slide-position{
+    position:absolute;
+}
+/* .main-content{
+  margin-top: 20px;
+} */
+/* .login-page{
+  display: flex;
+  align-content: center;
+  width: 100%;
+} */

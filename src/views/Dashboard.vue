@@ -1,19 +1,6 @@
 <template>
   <div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#addProductModal"
-    >Add Product</button>
-    <addNewProduct
-      class="modal fade"
-      id="addProductModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="addProductModal"
-      aria-hidden="true"
-    ></addNewProduct>
+    <addNewProduct></addNewProduct>
     <div class="row" style="height:100vh;">
       <div class="col-4 shadow-lg p-2">
         <h3 style="background-color:silver">Product List</h3>

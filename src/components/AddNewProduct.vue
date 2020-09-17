@@ -1,37 +1,60 @@
 <template>
-  <div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addProductModal">Add New Product</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#addProductModal"
+    >Add Product</button>
+
+    <div
+      class="modal fade"
+      id="addProductModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addProductModal"
+      aria-hidden="true"
+    >
+      <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModal">Add New Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form @submit.prevent="addNewProductToDatabase()">
+              <div class="modal-body">
+                <label for="newprod-name" class="label">
+                  <h4>Product Name</h4>
+                </label>
+                <input type="text" class="form-control" id="newprod-name" v-model="newProd.name" />
+                <label for="newprod-name" class="label">
+                  <h4>Image URL</h4>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newprod-name"
+                  v-model="newProd.image_url"
+                />
+                <label for="newprod-name" class="label">
+                  <h4>Price</h4>
+                </label>
+                <input type="text" class="form-control" id="newprod-name" v-model="newProd.price" />
+                <label for="newprod-name" class="label">
+                  <h4>Stock</h4>
+                </label>
+                <input type="text" class="form-control" id="newprod-name" v-model="newProd.stock" />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <form @submit.prevent="addNewProductToDatabase()">
-          <div class="modal-body">
-            <label for="newprod-name" class="label">
-              <h4>Product Name</h4>
-            </label>
-            <input type="text" class="form-control" id="newprod-name" v-model="newProd.name" />
-            <label for="newprod-name" class="label">
-              <h4>Image URL</h4>
-            </label>
-            <input type="text" class="form-control" id="newprod-name" v-model="newProd.image_url" />
-            <label for="newprod-name" class="label">
-              <h4>Price</h4>
-            </label>
-            <input type="text" class="form-control" id="newprod-name" v-model="newProd.price" />
-            <label for="newprod-name" class="label">
-              <h4>Stock</h4>
-            </label>
-            <input type="text" class="form-control" id="newprod-name" v-model="newProd.stock" />
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add</button>
-          </div>
-        </form>
       </div>
     </div>
   </div>

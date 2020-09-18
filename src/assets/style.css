@@ -3,13 +3,13 @@ body{
     width: 100vw;
 }
 
-.box-login{
+.box-login, .box-edit, .box-add{
     margin: 10% auto 0 auto;    
     width: 500px;
     height: 500px;
 }
 
-.form-login{
+.form-login, .form-edit, .form-add{
     height: 100%;
     padding-top: 30%;    
 }
@@ -45,12 +45,84 @@ body{
 
 }
 
-.form-login button{
+.form-edit input[name="edit.image_url"] , .form-add input[name="add.image_url"]
+{
+
+  width: 65%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('./url.png');
+  background-position: 10px 10px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 45px;
+
+}
+
+.form-edit input[name="edit.name"], .form-add input[name="add.name"]
+{
+
+  width: 65%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('./product.png');
+  background-position: 10px 10px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 45px;
+
+}
+
+.form-edit input[name="edit.price"], .form-add input[name="add.price"]
+{
+
+  width: 65%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('./price.png');
+  background-position: 10px 10px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 45px;
+
+}
+
+.form-edit input[name="edit.stock"], .form-add input[name="add.stock"]
+{
+
+  width: 65%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('./stock.jpeg');
+  background-position: 10px 10px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 45px;
+
+}
+
+.form-login button, .form-edit button, .form-add button{
     margin-top: 10px;
 }
 
 .form-login h1{ 
     margin-top: 23%;
+}
+
+.form-edit h1, .form-add h1{
+    margin-top: 15%;
 }
 
 .router{
@@ -71,8 +143,7 @@ body{
     color: #2c3e50;
   }
   
-  #nav {
-
+  #nav {  
     padding: 30px;
     height: 100vh;
   }
@@ -132,4 +203,8 @@ body{
 
   .box-rounding{
     border-radius: 75px !important;
+  }
+
+  .welcome-message{
+    margin-bottom: 5%;
   }

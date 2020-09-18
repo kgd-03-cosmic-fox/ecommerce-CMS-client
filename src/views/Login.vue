@@ -57,9 +57,13 @@ export default {
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
           this.$store.dispatch('fetchProducts')
+          this.$store.commit('SET_MESSAGE_ERROR', '')
+          this.$router.push({ name: 'Home' })
+          localStorage.setItem('email', data.email)
+          this.$emit('changeLoginStatus', true)
         })
         .catch(err => {
-          console.log(err)
+          this.$store.commit('SET_MESSAGE_ERROR', err.messages)
         })
     }
   },

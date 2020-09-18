@@ -5,11 +5,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    messageSuccess: '',
+    messageError: '',
+    statusAdd: '',
+    statusDelete: '',
+    statusEdit: ''
   },
   mutations: {
     SET_PRODUCTS (state, payload) {
       state.products = payload
+    },
+    SET_MESSAGE_SUCCESS (state, payload) {
+      state.messageSuccess = payload
+    },
+    SET_MESSAGE_ERROR (state, payload) {
+      state.messageError = payload
+    },
+    SET_STATUS_ADD (state, payload) {
+      state.statusAdd = payload
+    },
+    SET_STATUS_EDIT (state, payload) {
+      state.statusEdit = payload
+    },
+    SET_STATUS_DELETE (state, payload) {
+      state.statusDelete = payload
     }
   },
   actions: {
@@ -28,7 +48,76 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    addProducts (context, payload) {
+      ProductsAPI({
+        method: 'post',
+        url: '/products',
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock
+        },
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(data => {
+          context.commit('SET_MESSAGE_SUCCESS', data.messages)
+          context.dispatch('fetchProducts')
+          context.commit('SET_STATUS_ADD', 'success')
+        })
+        .catch(err => {
+          context.commit('SET_MESSAGE_ERROR', err.messages)
+          context.commit('SET_STATUS_ADD', 'failed')
+        })
+    },
+    deleteProducts (context, payload) {
+      ProductsAPI({
+        method: 'delete',
+        url: `/products/${payload}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(data => {
+          context.commit('SET_STATUS_DELETE', 'success')
+          context.commit('SET_MESSAGE_SUCCESS', data.message)
+          context.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          context.commit('SET_MESSAGE_ERROR', err.messages)
+          context.commit('SET_STATUS_DELETE', 'failed')
+        })
+    },
+    editProducts (context, payload) {
+      ProductsAPI({
+        method: 'put',
+        url: `/products/${payload.id}`,
+        data: {
+          name: payload.dataEdit.name,
+          image_url: payload.dataEdit.image_url,
+          price: payload.dataEdit.price,
+          stock: payload.dataEdit.stock
+        },
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(data => {
+          console.log(data)
+          context.commit('SET_STATUS_EDIT', 'success')
+          context.commit('SET_MESSAGE_SUCCESS', data.message)
+          context.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          console.log(err)
+          context.commit('SET_MESSAGE_ERROR', err.messages)
+          context.commit('SET_STATUS_EDIT', 'failed')
+        })
     }
+
   },
   getters: {
 

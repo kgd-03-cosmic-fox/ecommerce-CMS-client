@@ -5,17 +5,26 @@
 <td>{{product.price}}</td>
 <td>{{product.stock}}</td>
 <td>
-<img class="bi" src="../assets/pencil.png" alt="pencil">
+  <router-link :to="`/products/${product.id}`"><img class="bi" src="../assets/pencil.png" alt="pencil"></router-link>
 |
-<img class="bi" src="../assets/trashcan.png" alt="trash">
+<img class="bi" src="../assets/trashcan.png" alt="trash" v-on:click.prevent="deleteData(product.id)">
 </td>
 </tr>
 </template>
 
 <script>
+
 export default {
   name: 'Product',
-  props: ['product']
+  props: ['product'],
+  methods: {
+    deleteData (id) {
+      const confirmation = confirm('Are You sure want to delete this data?')
+      if (confirmation) {
+        this.$store.dispatch('deleteProducts', id)
+      }
+    }
+  }
 }
 </script>
 

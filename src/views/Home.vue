@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1 class="welcome-message">Welcome, <strong>{{email}}</strong></h1>
     <div class="container-fluid align-content-center">
       <div class="row">
         <div class="container col-9">
@@ -18,12 +19,12 @@
               style="title.background-color:red"
             >
                 <b-card-text>Product : {{dataProducts.length}} | All Stock : {{productsStock}}</b-card-text>
-              <b-button variant="primary"  class="box-rounding button-card">See All Product</b-button>
+              <b-button variant="primary"  class="box-rounding button-card" v-on:click.prevent="productPage">See All Product</b-button>
             </b-card>
 
             <b-card
               title="Ready Stock"
-              class="col-3 mr-auto shadow p-3 mb-5 bg-white"
+              class="col-3 mr-auto shadow p-3 mb-5 bg-black"
             >
               <b-card-text>Product : {{readyStock}}</b-card-text>
               <b-button variant="primary"  class="box-rounding button-card">See Product</b-button>
@@ -59,12 +60,9 @@
             </b-card>
           </div>
         </div>
-
       </div>
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -72,9 +70,9 @@
 
 export default {
   name: 'Home',
-  data () {
-    return {
-
+  methods: {
+    productPage () {
+      this.$router.push({ name: 'Product' })
     }
   },
   computed: {
@@ -115,7 +113,7 @@ export default {
         totalPrice += this.dataProducts[i].price
       }
 
-      averagePrice = totalPrice / this.dataProducts.length
+      averagePrice = (totalPrice / this.dataProducts.length).toFixed(2)
       return averagePrice
     },
     belowAvgPrice () {
@@ -139,6 +137,19 @@ export default {
       }
 
       return aboveProduct
+    },
+    email () {
+      return localStorage.getItem('email')
+    }
+  },
+  created () {
+    this.$store.dispatch('fetchProducts')
+  },
+  beforeRouteEnter (to, from, next) {
+    if (localStorage.getItem('access_token')) {
+      next()
+    } else {
+      next('/login')
     }
   }
 }

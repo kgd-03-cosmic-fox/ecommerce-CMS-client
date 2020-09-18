@@ -8,7 +8,7 @@
       <p>Price :</p>
       <div class="card-button">
         <button type="button" class="btn btn-danger">Delete</button>
-        <button type="button" class="btn btn-warning">Details</button>
+        <router-link to="/details"><button type="button" class="btn btn-warning">Details</button></router-link>
       </div>
     </div>
   </div>

@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import instanceAPI from '../api/instanceAPI.js'
 export default {
   name: 'Login',
   data () {
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     login () {
-      axios({
+      instanceAPI({
         method: 'POST',
         url: 'http://localhost:3007/login',
         data: {

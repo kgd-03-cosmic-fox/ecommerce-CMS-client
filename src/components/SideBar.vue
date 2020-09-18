@@ -2,16 +2,16 @@
   <div class="col-3">
     <div class="col">
       <div class="my-3">
-        List Product
+        <router-link to="/products">List Product</router-link>
       </div>
       <div class="my-3">
-        Add Product
+        <router-link to="/add-item">Add Product</router-link>
       </div>
       <div class="my-3">
         Restock Product
       </div>
       <div class="my-3">
-        List of Empty Product
+        <router-link to="/outstock-list">List of Empty Product</router-link>
       </div>
       <div class="my-3">
         Logout

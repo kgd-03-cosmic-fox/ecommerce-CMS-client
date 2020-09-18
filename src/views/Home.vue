@@ -7,28 +7,47 @@
           <!-- sidebar -->
           <SideBar></SideBar>
           <!-- main contain menu -->
-          <ListOfItem></ListOfItem>
+          <!-- <ListOfItem></ListOfItem> -->
           <!-- <AddItem></AddItem> -->
           <!-- <ListOfEmpty></ListOfEmpty> -->
+          <router-view></router-view>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import ListOfItem from '../components/ListOfItem.vue'
+import instanceAPI from '../api/instanceAPI.js'
 import SideBar from '../components/SideBar.vue'
-// import ListOfEmpty from '../components/ListEmpty'
-// import AddItem from '../components/AddItem.vue'
 import Navbar from '../components/Navbar.vue'
 export default {
   name: 'Home',
+  data () {
+    return {
+      item: []
+    }
+  },
   components: {
     SideBar,
-    Navbar,
-    ListOfItem
-    // AddItem,
-    // ListOfEmpty
+    Navbar
+  },
+  methods: {
+    fetchItem () {
+      instanceAPI({
+        method: 'get',
+        url: '/products',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          this.item = data
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>

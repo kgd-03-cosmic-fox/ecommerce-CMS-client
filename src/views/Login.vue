@@ -37,7 +37,7 @@ export default {
     login () {
       instanceAPI({
         method: 'POST',
-        url: 'http://localhost:3007/login',
+        url: 'https://ecommerge-cms.herokuapp.com/login',
         data: {
           email: this.user.email,
           password: this.user.password
@@ -54,13 +54,6 @@ export default {
           this.user.email = ''
           this.user.password = ''
         })
-    }
-  },
-  beforeRouteEnter (to, from, next) {
-    if (localStorage.getItem('access_token')) {
-      next('/products')
-    } else {
-      next('/login')
     }
   },
   beforeRouteLeave (to, from, next) {

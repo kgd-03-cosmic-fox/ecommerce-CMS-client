@@ -1,4 +1,4 @@
 import axios from 'axios'
 export default axios.create({
-  baseUrl: 'http://localhost:3007'
+  baseUrl: 'https://ecommerge-cms.herokuapp.com'
 })

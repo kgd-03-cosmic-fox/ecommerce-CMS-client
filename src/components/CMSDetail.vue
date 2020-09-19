@@ -1,22 +1,30 @@
 <template>
   <div class="row">
     <div class="card col-4" style="">
-      <img class="card-img-top" src="" alt="Card image cap" />
+      <img
+        class="card-img-top"
+        v-bind:src="productToEdit.image_url"
+        alt="Card image cap"
+      />
     </div>
     <div class="col-8 container">
       <h1>{{ productToEdit.name }}</h1>
       <form @submit.prevent="initiateUpdateProductDetail">
-        <table class="table">
+        <table class="table" id="edit-detail-table">
           <thead>
-            <th></th>
-            <th>Current</th>
-            <th>New</th>
+            <tr class="d-flex">
+              <th class="col-2"></th>
+              <th class="col-5" style="word-wrap: break-word">Current</th>
+              <th class="col-4">New</th>
+            </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>Item Name</th>
-              <td>{{ productToEdit.name }}</td>
-              <td>
+            <tr class="d-flex">
+              <th class="col-2">Item Name</th>
+              <td class="col-5" style="word-wrap: break-word">
+                {{ productToEdit.name }}
+              </td>
+              <td class="col-4">
                 <input
                   type="text"
                   class="form-control"
@@ -25,10 +33,12 @@
                 />
               </td>
             </tr>
-            <tr>
-              <th>Image URL</th>
-              <td>{{ productToEdit.image_url }}</td>
-              <td>
+            <tr class="d-flex">
+              <th class="col-2">Image URL</th>
+              <td class="col-5" style="word-wrap: break-word">
+                {{ productToEdit.image_url }}
+              </td>
+              <td class="col-4">
                 <input
                   type="text"
                   class="form-control"
@@ -37,10 +47,12 @@
                 />
               </td>
             </tr>
-            <tr>
-              <th>Price</th>
-              <td>{{ productToEdit.price }}</td>
-              <td>
+            <tr class="d-flex">
+              <th class="col-2">Price</th>
+              <td class="col-5" style="word-wrap: break-word">
+                {{ productToEdit.price }}
+              </td>
+              <td class="col-4">
                 <input
                   type="number"
                   class="form-control"
@@ -49,10 +61,12 @@
                 />
               </td>
             </tr>
-            <tr>
-              <th>Stock</th>
-              <td>{{ productToEdit.stock }}</td>
-              <td>
+            <tr class="d-flex">
+              <th class="col-2">Stock</th>
+              <td class="col-5" style="word-wrap: break-word">
+                {{ productToEdit.stock }}
+              </td>
+              <td class="col-4">
                 <input
                   type="number"
                   class="form-control"
@@ -61,8 +75,8 @@
                 />
               </td>
             </tr>
-            <tr>
-              <td>
+            <tr class="d-flex">
+              <td class="col-2">
                 <button
                   type="button"
                   class="btn btn-danger"
@@ -71,8 +85,8 @@
                   Delete Item
                 </button>
               </td>
-              <td></td>
-              <td>
+              <td class="col-5" style="word-wrap: break-word"></td>
+              <td class="col-4">
                 <button type="submit" class="btn btn-success">
                   Edit Product Info
                 </button>

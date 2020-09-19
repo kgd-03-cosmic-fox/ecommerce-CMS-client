@@ -12,14 +12,14 @@
       <form @submit.prevent="initiateUpdateProductDetail">
         <table class="table" id="edit-detail-table">
           <thead>
-            <tr class="d-flex">
+            <tr class="row">
               <th class="col-2"></th>
               <th class="col-5" style="word-wrap: break-word">Current</th>
               <th class="col-4">New</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="d-flex">
+            <tr class="row">
               <th class="col-2">Item Name</th>
               <td class="col-5" style="word-wrap: break-word">
                 {{ productToEdit.name }}
@@ -33,7 +33,7 @@
                 />
               </td>
             </tr>
-            <tr class="d-flex">
+            <tr class="row">
               <th class="col-2">Image URL</th>
               <td class="col-5" style="word-wrap: break-word">
                 {{ productToEdit.image_url }}
@@ -47,7 +47,7 @@
                 />
               </td>
             </tr>
-            <tr class="d-flex">
+            <tr class="row">
               <th class="col-2">Price</th>
               <td class="col-5" style="word-wrap: break-word">
                 {{ productToEdit.price }}
@@ -61,7 +61,7 @@
                 />
               </td>
             </tr>
-            <tr class="d-flex">
+            <tr class="row">
               <th class="col-2">Stock</th>
               <td class="col-5" style="word-wrap: break-word">
                 {{ productToEdit.stock }}
@@ -75,7 +75,7 @@
                 />
               </td>
             </tr>
-            <tr class="d-flex">
+            <tr class="row">
               <td class="col-2">
                 <button
                   type="button"

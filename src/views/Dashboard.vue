@@ -1,14 +1,14 @@
 <template>
   <div>
-    <Navbar></Navbar>
-    <div class="row" style="height: 100vh">
-      <div class="col-3 shadow-lg p-2">
+    <Navbar style="width: 98vw"></Navbar>
+    <div class="row" style="height: 100vh; width: 99vw">
+      <div class="col-4 shadow-lg p-2">
         <h3 style="background-color: silver" class="text-center">
           Product List
         </h3>
         <CMSSidebar></CMSSidebar>
       </div>
-      <div class="col-9 shadow-lg p-2">
+      <div class="col-8 shadow-lg p-2">
         <h3 style="background-color: silver" class="text-center">
           Product Info
         </h3>

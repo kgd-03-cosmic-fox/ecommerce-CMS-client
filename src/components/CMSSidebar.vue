@@ -4,9 +4,9 @@
       <thead>
         <tr class="row">
           <th class="col-1"></th>
-          <th scope="col" class="col-3" style="word-wrap: break-word">Name</th>
-          <th scope="col" class="col-5" style="word-wrap: break-word">Price</th>
-          <th scope="col" class="col-2"></th>
+          <th scope="col" class="col-4" style="word-wrap: break-word">Name</th>
+          <th scope="col" class="col-4" style="word-wrap: break-word">Price</th>
+          <th scope="col" class="col-1"></th>
         </tr>
       </thead>
       <tbody>

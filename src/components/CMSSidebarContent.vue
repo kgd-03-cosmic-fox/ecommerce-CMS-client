@@ -1,10 +1,10 @@
 <template>
   <tr class="row">
     <th class="col-1"></th>
-    <th class="col-3" scope="row" style="word-wrap: break-word">
+    <th class="col-4" scope="row" style="word-wrap: break-word">
       {{ product.name }}
     </th>
-    <td class="col-5" style="word-wrap: break-word">
+    <td class="col-4" style="word-wrap: break-word">
       {{
         new Intl.NumberFormat("de-DE", {
           style: "currency",
@@ -12,7 +12,7 @@
         }).format(product.price)
       }}
     </td>
-    <td class="col-2">
+    <td class="col-1">
       <button @click.prevent="editItem">Edit</button>
     </td>
   </tr>

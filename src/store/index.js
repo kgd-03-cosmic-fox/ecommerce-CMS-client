@@ -111,7 +111,6 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           context.commit('SET_STATUS_EDIT', 'success')
           context.commit('SET_MESSAGE_SUCCESS', data.message)
           context.dispatch('fetchProducts')

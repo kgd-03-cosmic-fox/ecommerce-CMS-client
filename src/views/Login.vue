@@ -40,8 +40,8 @@ export default {
   data () {
     return {
       login: {
-        email: 'admin@email.com',
-        password: '1234'
+        email: '',
+        password: ''
       }
     }
   },

@@ -1,5 +1,7 @@
 # ecommerce-cms-client
 
+App is deployed at: https://ecom-cms-client.web.app/
+
 ## Project setup
 ```
 npm install

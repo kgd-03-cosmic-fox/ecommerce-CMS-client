@@ -7,6 +7,7 @@ import AddItem from '../components/AddItem.vue'
 import ListOfEmpty from '../components/ListEmpty'
 import ListOfItem from '../components/ListOfItem.vue'
 import ProductDetails from '../components/ProductDetails.vue'
+import EditItem from '../components/EditItem.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,9 +32,14 @@ const routes = [
         component: ListOfEmpty
       },
       {
-        path: '/details',
+        path: '/details/:id',
         name: 'ProductDetails',
         component: ProductDetails
+      },
+      {
+        path: '/edit/:id',
+        name: 'EditItem',
+        component: EditItem
       }
     ]
   },

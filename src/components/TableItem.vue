@@ -1,13 +1,14 @@
 <template>
   <tr>
-    <th scope="row">1</th>
-    <td>Sepatu</td>
-    <td>https://cdn.popmama.com/content-images/post/20191217/hc39468e5ceee44c49c892c0e334a111ehjpg-q50-e62609efe3386029018997c67b15976f_600xauto.jpg</td>
-    <td>300000</td>
+    <th scope="row">{{ item.name }}</th>
+    <td>{{ item.stock }}</td>
+    <td>{{ item.price }}</td>
+    <td><router-link :to="`/edit/${item.id}`"><button type="button" class="btn btn-warning">Restock/Edit</button></router-link></td>
   </tr>
 </template>
 <script>
 export default {
+  props: ['item'],
   name: 'TableItem'
 }
 </script>

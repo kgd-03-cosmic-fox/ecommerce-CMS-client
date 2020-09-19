@@ -1,20 +1,35 @@
 <template>
   <div class="col-3">
     <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="https://cdn.popmama.com/content-images/post/20191217/hc39468e5ceee44c49c892c0e334a111ehjpg-q50-e62609efe3386029018997c67b15976f_600xauto.jpg" alt="Card image cap">
+      <img class="card-img-top" :src="item.image_url" alt="Card image cap">
       <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text h3">{{ item.name }}</p>
+        <p class="h5">Price : {{ price }}</p>
+        <p class="h5">Stock Left : {{ item.stock }}</p>
       </div>
-      <p>Price :</p>
       <div class="card-button">
-        <button type="button" class="btn btn-danger">Delete</button>
-        <router-link to="/details"><button type="button" class="btn btn-warning">Details</button></router-link>
+        <button type="button" class="btn btn-danger" @click="delItem(item.id)">Delete</button>
+        <router-link :to="`/details/${item.id}`"><button type="button" class="btn btn-warning">Details</button></router-link>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'ItemCard'
+  name: 'ItemCard',
+  props: ['item'],
+  methods: {
+    delItem (id) {
+      const agreement = confirm('Are you sure to delete this item?')
+      if (agreement === true) {
+        this.$store.dispatch('deleteItem', { id: id })
+      }
+    }
+  },
+  computed: {
+    price () {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'IDR' }).format(this.item.price)
+    }
+  }
 }
 </script>

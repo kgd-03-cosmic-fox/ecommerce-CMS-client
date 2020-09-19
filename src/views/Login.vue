@@ -45,7 +45,7 @@ export default {
       })
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
-          this.$router.push({ name: 'Home' })
+          this.$router.push({ path: '/products' })
         })
         .catch(err => {
           console.log(err.message)
@@ -54,6 +54,20 @@ export default {
           this.user.email = ''
           this.user.password = ''
         })
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    if (localStorage.getItem('access_token')) {
+      next('/products')
+    } else {
+      next('/login')
+    }
+  },
+  beforeRouteLeave (to, from, next) {
+    if (localStorage.getItem('access_token')) {
+      next()
+    } else {
+      next('/login')
     }
   }
 }

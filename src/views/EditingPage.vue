@@ -3,11 +3,12 @@
     <NavBar/>
     <div class="container  update-box">
       <div class="col-sm border border-secondary product-list-box pt-4">
-      <img src="https://s-ecom.ottenstatic.com/original/564999fa9b7d8.jpg" class="card-img-top" alt="..." style="height:auto">
+      <img :src="getProduct.imgUrl" class="card-img-top" alt="..." style="height:auto">
       <div class="card-body">
-        <h5 class="card-title" >Something here</h5>
-        <p class="card-text">Rp. Price here</p>
-        <button @click='editProduct(product.id)' class="btn btn-sm btn-outline-danger">Delete products</button>
+        <h5 class="card-title" >{{getProduct.name}}</h5>
+        <p class="card-text">Rp. {{getProduct.price}}</p>
+        <p class="card-text">Stock {{getProduct.stock}}</p>
+        <button @click="uhhAkuTerpanggil" class="btn btn-sm btn-outline-danger">Pencet aku</button>
       </div>
     </div>
       <div class="col-sm py-4 border border-secondary">
@@ -36,7 +37,7 @@
 
 <script>
 import NavBar from '../components/NavBar'
-// import kobajaApi from '../api/kobajaApi'
+import kobajaApi from '../api/kobajaApi'
 
 export default {
   name: 'CategoryPage',
@@ -48,6 +49,12 @@ export default {
         price: 0,
         stock: 0,
         imgUrl: ''
+      },
+      getProduct: {
+        name: '',
+        price: 0,
+        stock: 0,
+        imgUrl: ''
       }
     }
   },
@@ -56,30 +63,66 @@ export default {
   },
   methods: {
     editProduct () {
-      console.log(this.$routes.params.id)
-      // kobajaApi({
-      //   url: `/product/${id}`,
-      //   method: 'PUT',
-      //   data: {
-      //     name: this.product.name,
-      //     category: this.product.category,
-      //     price: this.product.price,
-      //     stock: this.product.stock,
-      //     imgUrl: this.product.imgUrl
-      //   },
-      //   headers: {
-      //     access_token: localStorage.getItem('access_token')
-      //   }
-      // })
-      //   .then(data => {
-      //     this.refreshPage()
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
+      kobajaApi({
+        url: `/product/${this.$route.params.id}`,
+        method: 'PUT',
+        data: {
+          name: this.product.name,
+          category: this.product.category,
+          price: this.product.price,
+          stock: this.product.stock,
+          imgUrl: this.product.imgUrl
+        },
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          window.confirm(data.message)
+        })
+        .catch((err) => {
+          window.confirm(err)
+          console.log(err)
+        })
     },
-    refreshPage () {
-      // this.$router.push({ path: '/' })
+    fetchProductById () {
+      kobajaApi({
+        url: `/product/${this.$route.params.id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          console.log(data)
+          this.getProduct.name = data.product.name
+          this.getProduct.price = data.product.price
+          this.getProduct.stock = data.product.stock
+          this.getProduct.imgUrl = data.product.imgUrl
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    delete (id) {
+    },
+    uhhAkuTerpanggil () {
+      const answer = window.confirm('Are you sure you want to delete this product?')
+      if (answer) {
+        kobajaApi({
+          url: `product/${this.$route.params.id}`,
+          method: 'DELETE',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            window.confirm('Product has been deleted')
+            this.$router.push({ name: 'CategoryPage' })
+          })
+          .catch(_ => {
+            console.log('Error :(')
+          })
+      }
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -91,7 +134,7 @@ export default {
     }
   },
   created () {
-    // this.refreshPage()
+    this.fetchProductById()
   }
 }
 </script>

@@ -20,7 +20,6 @@ import kobajaApi from '../api/kobajaApi'
 
 export default {
   name: 'ManualBrewers',
-  // props: ['product'],
   computed: {
     products () {
       return this.$store.state.manualBrewers

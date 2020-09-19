@@ -5,17 +5,40 @@
       <div class="card-body">
         <h5 class="card-title" >{{product.name}}</h5>
         <p class="card-text">Rp.{{product.price}}</p>
-        <a href="#" class="btn btn-primary">Update</a>
-        <button class="btn btn-sm btn-outline-danger">Delete Products</button>
+        <router-link :to="`product/${product.id}`" class="btn btn-primary">Update Product</router-link>
+        <button @click="deleteProduct(product.id)" class="btn btn-sm btn-outline-danger">Delete Products</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+import kobajaApi from '../api/kobajaApi'
+
 export default {
   name: 'Products',
-  props: ['products']
+  props: ['products'],
+  methods: {
+    deleteProduct (id) {
+      const answer = window.confirm('Do you really want to delete this product?')
+      if (answer) {
+        kobajaApi({
+          url: `/product/${id}`,
+          method: 'DELETE',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            this.$emit('fetchData')
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    }
+  }
 }
 </script>
 

@@ -99,15 +99,13 @@ export default new Vuex.Store({
         })
     },
     editItem (context, payload) {
-      console.log('Kepanggil di store')
       instanceAPI({
         method: 'put',
         url: `http://localhost:3007/items/${payload.id}`,
         data: {
-          name: payload.name,
-          image_url: payload.image_url,
-          price: payload.price,
-          stock: payload.stock
+          name: payload.item.name,
+          price: payload.item.price,
+          stock: payload.item.stock
         },
         headers: {
           access_token: localStorage.getItem('access_token')

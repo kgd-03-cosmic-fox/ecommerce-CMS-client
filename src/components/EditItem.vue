@@ -1,18 +1,12 @@
 <template>
   <div class="col-9">
     <div class="container">
-      <h2>Edit Your Item Here</h2>
+      <h2>Edit Your Item Here ({{ editedItem.name }})</h2>
       <form class="form-horizontal">
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Name:</label>
           <div class="col-sm-10">
             <input v-model="item.name" type="text" class="form-control" id="item" placeholder="Update Item Name" name="name">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="image_url">Image Url:</label>
-          <div class="col-sm-10">
-            <input v-model="item.image_url" type="text" class="form-control" id="item" placeholder="Update Item Name" name="image_url">
           </div>
         </div>
         <div class="form-group">
@@ -29,7 +23,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-primary" @click="editMyItem(this.$route.params.id)">Edit Item</button>
+            <button type="submit" class="btn btn-primary" @click.prevent="editMyItem(editedItem.id)">Edit Item</button>
           </div>
         </div>
       </form>
@@ -42,9 +36,7 @@ export default {
   data () {
     return {
       item: {
-        id: this.$route.params.id,
         name: '',
-        image_url: '',
         price: '',
         stock: ''
       }
@@ -52,9 +44,17 @@ export default {
   },
   methods: {
     editMyItem (id) {
-      console.log('Kepanggil')
-      this.$store.dispatch('editItem', this.item)
-      this.router.push({ path: '/products' })
+      console.log(this.$route.params.id)
+      this.$store.dispatch('editItem', { id: id, item: this.item })
+      this.$router.push({ path: '/products' })
+    }
+  },
+  created () {
+    this.$store.dispatch('fetchDetailItem', { id: this.$route.params.id })
+  },
+  computed: {
+    editedItem () {
+      return this.$store.state.detail
     }
   }
 }

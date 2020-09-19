@@ -9,7 +9,12 @@
         </tr>
       </thead>
       <tbody>
-        <CMSSidebarContent></CMSSidebarContent>
+        <CMSSidebarContent
+          v-for="product in productList"
+          v-bind:key="product.id"
+          v-bind:product="product"
+        >
+        </CMSSidebarContent>
       </tbody>
     </table>
   </div>
@@ -19,6 +24,15 @@
 import CMSSidebarContent from "./CMSSidebarContent";
 export default {
   components: { CMSSidebarContent },
+  computed: {
+    productList() {
+      return this.$store.state.products;
+    },
+  },
+  methods: {},
+  created() {
+    this.$store.dispatch("fetchProductDatas");
+  },
 };
 </script>
 

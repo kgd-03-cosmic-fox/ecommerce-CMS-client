@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import AddNewProduct from '../views/AddNewProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -13,8 +14,13 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'dashboard',
+    name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/add-product',
+    name: 'AddNewProduct',
+    component: AddNewProduct
   }
 ]
 

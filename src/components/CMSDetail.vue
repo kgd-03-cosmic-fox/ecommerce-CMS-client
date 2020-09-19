@@ -50,7 +50,12 @@
             <tr class="row">
               <th class="col-2">Price</th>
               <td class="col-5" style="word-wrap: break-word">
-                {{ productToEdit.price }}
+                {{
+                  new Intl.NumberFormat("de-DE", {
+                    style: "currency",
+                    currency: "IDR",
+                  }).format(productToEdit.price)
+                }}
               </td>
               <td class="col-4">
                 <input

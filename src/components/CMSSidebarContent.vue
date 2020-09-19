@@ -1,8 +1,18 @@
 <template>
-  <tr>
-    <th scope="row">{{ product.name }}</th>
-    <td>{{ product.price }}</td>
-    <td>
+  <tr class="row">
+    <th class="col-1"></th>
+    <th class="col-3" scope="row" style="word-wrap: break-word">
+      {{ product.name }}
+    </th>
+    <td class="col-5" style="word-wrap: break-word">
+      {{
+        new Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "IDR",
+        }).format(product.price)
+      }}
+    </td>
+    <td class="col-2">
       <button @click.prevent="editItem">Edit</button>
     </td>
   </tr>

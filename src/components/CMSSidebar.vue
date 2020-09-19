@@ -2,10 +2,11 @@
   <div>
     <table class="table">
       <thead>
-        <tr style>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
-          <th scope="col"></th>
+        <tr class="row">
+          <th class="col-1"></th>
+          <th scope="col" class="col-3" style="word-wrap: break-word">Name</th>
+          <th scope="col" class="col-5" style="word-wrap: break-word">Price</th>
+          <th scope="col" class="col-2"></th>
         </tr>
       </thead>
       <tbody>

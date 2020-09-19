@@ -6,7 +6,7 @@
           <div class="d-flex flex-column">
             <router-link to="/" class="router"  v-show="loginStatus">Home</router-link>
             <router-link to="/about" class="router"  v-show="loginStatus">About</router-link>
-            <router-link to="/products" class="router"  v-show="loginStatus">Product</router-link>
+            <router-link to="/products" class="router" v-show="loginStatus">Product</router-link>
             <a href="#" class="router" v-on:click.prevent="Logout" v-show="loginStatus">Logout</a>
           </div>
         </div>
@@ -33,6 +33,8 @@ export default {
       this.$store.commit('SET_PRODUCTS', [])
       this.$router.push({ name: 'Login' })
       this.changeStatus(false)
+      this.$store.commit('SET_MESSAGE_ERROR', '')
+      this.$store.commit('SET_MESSAGE_SUCCESS', '')
     },
     changeStatus (param) {
       this.loginStatus = param

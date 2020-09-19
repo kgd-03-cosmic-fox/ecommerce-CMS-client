@@ -10,9 +10,15 @@ export default new Vuex.Store({
     messageError: '',
     statusAdd: '',
     statusDelete: '',
-    statusEdit: ''
+    statusEdit: '',
+    validate: '',
+    operator: ''
   },
   mutations: {
+    SET_VALIDATE_OPERATOR (state, payload) {
+      state.validate = payload.validate
+      state.operator = payload.operator
+    },
     SET_PRODUCTS (state, payload) {
       state.products = payload
     },
@@ -42,11 +48,10 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           context.commit('SET_PRODUCTS', data)
         })
         .catch(err => {
-          console.log(err)
+          context.commit('SET_MESSAGE_ERROR', err.message)
         })
     },
     addProducts (context, payload) {
@@ -63,13 +68,13 @@ export default new Vuex.Store({
           access_token: localStorage.getItem('access_token')
         }
       })
-        .then(data => {
-          context.commit('SET_MESSAGE_SUCCESS', data.messages)
+        .then(({ data }) => {
+          context.commit('SET_MESSAGE_SUCCESS', data.message)
           context.dispatch('fetchProducts')
           context.commit('SET_STATUS_ADD', 'success')
         })
         .catch(err => {
-          context.commit('SET_MESSAGE_ERROR', err.messages)
+          context.commit('SET_MESSAGE_ERROR', err.response.data.message)
           context.commit('SET_STATUS_ADD', 'failed')
         })
     },
@@ -81,13 +86,13 @@ export default new Vuex.Store({
           access_token: localStorage.getItem('access_token')
         }
       })
-        .then(data => {
+        .then(({ data }) => {
           context.commit('SET_STATUS_DELETE', 'success')
           context.commit('SET_MESSAGE_SUCCESS', data.message)
           context.dispatch('fetchProducts')
         })
         .catch(err => {
-          context.commit('SET_MESSAGE_ERROR', err.messages)
+          context.commit('SET_MESSAGE_ERROR', err.response.data.message)
           context.commit('SET_STATUS_DELETE', 'failed')
         })
     },
@@ -105,15 +110,14 @@ export default new Vuex.Store({
           access_token: localStorage.getItem('access_token')
         }
       })
-        .then(data => {
+        .then(({ data }) => {
           console.log(data)
           context.commit('SET_STATUS_EDIT', 'success')
           context.commit('SET_MESSAGE_SUCCESS', data.message)
           context.dispatch('fetchProducts')
         })
         .catch(err => {
-          console.log(err)
-          context.commit('SET_MESSAGE_ERROR', err.messages)
+          context.commit('SET_MESSAGE_ERROR', err.response.data.message)
           context.commit('SET_STATUS_EDIT', 'failed')
         })
     }

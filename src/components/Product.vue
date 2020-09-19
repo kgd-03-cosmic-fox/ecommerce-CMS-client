@@ -13,7 +13,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Product',
   props: ['product'],
@@ -22,6 +21,9 @@ export default {
       const confirmation = confirm('Are You sure want to delete this data?')
       if (confirmation) {
         this.$store.dispatch('deleteProducts', id)
+        setTimeout(() => {
+          this.$store.commit('SET_MESSAGE_SUCCESS', '')
+        }, 2000)
       }
     }
   }

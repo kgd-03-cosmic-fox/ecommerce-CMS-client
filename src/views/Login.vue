@@ -1,5 +1,6 @@
 <template>
     <div class="text-center">
+      <b-alert variant="danger" show v-if="errorMessage">{{errorMessage}}</b-alert>
         <div class="box-login bg-color-success">
             <div class="form-login shadow-lg p-3 mb-5 bg-white rounded">
                 <h1>Login</h1>
@@ -63,8 +64,13 @@ export default {
           this.$emit('changeLoginStatus', true)
         })
         .catch(err => {
-          this.$store.commit('SET_MESSAGE_ERROR', err.messages)
+          this.$store.commit('SET_MESSAGE_ERROR', err.response.data.message)
         })
+    },
+    deleteNotif () {
+      setTimeout(() => {
+        this.$store.commit('SET_MESSAGE_ERROR', '')
+      }, 3500)
     }
   },
   computed: {
@@ -73,7 +79,17 @@ export default {
     },
     dataProducts () {
       return this.$store.state.products
+    },
+    errorMessage () {
+      return this.$store.state.messageError
     }
+  },
+  beforeMount () {
+    this.deleteNotif()
+  },
+  created () {
+    this.$store.commit('SET_MESSAGE_ERROR', '')
+    this.$store.commit('SET_MESSAGE_SUCCESS', '')
   }
 }
 </script>

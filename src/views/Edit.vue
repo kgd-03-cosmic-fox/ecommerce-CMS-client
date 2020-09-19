@@ -1,5 +1,6 @@
 <template>
     <div class="text-center">
+      <b-alert variant="danger" show v-if="errorMessage">{{errorMessage}}</b-alert>
         <div class="box-edit bg-color-success">
             <div class="form-edit shadow-lg p-3 bg-white rounded">
                 <h1>Edit Product</h1>
@@ -75,6 +76,8 @@ export default {
       if (this.status === 'success') {
         this.$router.push({ name: 'Product' })
         this.$store.commit('SET_STATUS_EDIT', '')
+      } else {
+        this.errorHandling()
       }
     },
     fetchDataId () {
@@ -92,10 +95,14 @@ export default {
           this.edit.stock = data.stock
         })
         .catch(err => {
-          console.log(err)
+          this.$store.commit('SET_MESSAGE_ERROR', err.response.data.message)
         })
+    },
+    errorHandling () {
+      setTimeout(() => {
+        this.$store.commit('SET_MESSAGE_ERROR', '')
+      }, 3500)
     }
-
   },
   computed: {
     status () {
@@ -103,10 +110,16 @@ export default {
     },
     id () {
       return this.$route.params.id
+    },
+    errorMessage () {
+      return this.$store.state.messageError
     }
   },
   created () {
     this.fetchDataId()
+  },
+  beforeMount () {
+
   },
   beforeRouteEnter (to, from, next) {
     if (localStorage.getItem('access_token')) {

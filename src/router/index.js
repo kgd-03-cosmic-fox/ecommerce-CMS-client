@@ -38,7 +38,7 @@ const routes = [
     component: Edit
   },
   {
-    path: '/add',
+    path: 'add',
     name: 'AddProduct',
     component: Add
   }

@@ -5,59 +5,29 @@
       <div class="row">
         <div class="container col-9">
           <div class="row">
-            <b-card
-              title="No Stock"
-              class="col-3 mr-3 ml-auto shadow p-3 mb-5 bg-white"
-            >
-              <b-card-text>Product : {{noStock}}</b-card-text>
-              <b-button href="#" variant="primary"  class="box-rounding button-card">Restock Product</b-button>
-            </b-card>
-
-            <b-card
-              title="All Stock"
-              class="col-3 mr-3 shadow p-3 mb-5 bg-white"
-              style="title.background-color:red"
-            >
-                <b-card-text>Product : {{dataProducts.length}} | All Stock : {{productsStock}}</b-card-text>
-              <b-button variant="primary"  class="box-rounding button-card" v-on:click.prevent="productPage">See All Product</b-button>
-            </b-card>
-
-            <b-card
-              title="Ready Stock"
-              class="col-3 mr-auto shadow p-3 mb-5 bg-black"
-            >
-              <b-card-text>Product : {{readyStock}}</b-card-text>
-              <b-button variant="primary"  class="box-rounding button-card">See Product</b-button>
-            </b-card>
-
+            <NoStockCard
+            v-bind:noStock="noStock"
+            ></NoStockCard>
+            <AllStockCard
+            v-bind:dataProducts="dataProducts"
+            v-bind:productsStock="productsStock"
+            ></AllStockCard>
+            <ReadyStockCard
+            v-bind:readyStock="readyStock"
+            ></ReadyStockCard>
           </div>
         </div>
-
         <div class="container col-9 mt-5">
           <div class="row">
-            <b-card
-              title="Less Than Average"
-              class="col-3 mr-3 ml-auto shadow p-3 mb-5 bg-white"
-            >
-              <b-card-text>Below Average Price : {{belowAvgPrice}} Products</b-card-text>
-              <b-button variant="primary"  class="box-rounding">See Product</b-button>
-            </b-card>
-
-            <b-card
-              title="Average Price"
-              class="col-3 mr-3 shadow p-3 mb-5 bg-white"
-              style="title.background-color:red"
-            >
-              <b-card-text>Average Price : {{avgPrice}}</b-card-text>
-            </b-card>
-
-            <b-card
-              title="Greater Than Average"
-              class="col-3 mr-auto shadow p-3 mb-5 bg-white"
-            >
-              <b-card-text>Above Average Price: {{aboveAvgPrice}} Products</b-card-text>
-              <b-button variant="primary"  class="box-rounding button-card">See Product</b-button>
-            </b-card>
+            <LessAverageCard
+            v-bind:belowAvgPrice="belowAvgPrice"
+            ></LessAverageCard>
+            <AveragePriceCard
+            v-bind:avgPrice="avgPrice"
+            ></AveragePriceCard>
+           <AboveAverageCard
+           v-bind:aboveAvgPrice="aboveAvgPrice"
+           ></AboveAverageCard>
           </div>
         </div>
       </div>
@@ -67,13 +37,22 @@
 
 <script>
 // @ is an alias to /src
+import NoStockCard from '../components/noStockCard'
+import AllStockCard from '../components/allProduct'
+import ReadyStockCard from '../components/readyProduct'
+import LessAverageCard from '../components/lessAverageProduct'
+import AveragePriceCard from '../components/averagePriceProduct'
+import AboveAverageCard from '../components/aboveAverageProduct'
 
 export default {
   name: 'Home',
-  methods: {
-    productPage () {
-      this.$router.push({ name: 'Product' })
-    }
+  components: {
+    NoStockCard,
+    AllStockCard,
+    ReadyStockCard,
+    LessAverageCard,
+    AveragePriceCard,
+    AboveAverageCard
   },
   computed: {
     dataProducts () {
@@ -144,6 +123,7 @@ export default {
   },
   created () {
     this.$store.dispatch('fetchProducts')
+    this.$store.commit('SET_VALIDATE_OPERATOR', { validate: '', operator: '' })
   },
   beforeRouteEnter (to, from, next) {
     if (localStorage.getItem('access_token')) {

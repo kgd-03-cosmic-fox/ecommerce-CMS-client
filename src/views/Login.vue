@@ -45,7 +45,7 @@ export default {
       })
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
-          this.$router.push({ path: '/products' })
+          this.$router.push({ name: 'ListOfItem' })
         })
         .catch(err => {
           console.log(err.message)

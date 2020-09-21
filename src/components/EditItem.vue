@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     editMyItem (id) {
-      console.log(this.$route.params.id)
       this.$store.dispatch('editItem', { id: id, item: this.item })
       this.$router.push({ path: '/products' })
     }

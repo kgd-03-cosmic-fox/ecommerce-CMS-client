@@ -38,7 +38,6 @@ export default new Vuex.Store({
           setTimeout(() => {
             context.commit('SET_NOTIFICATION', '')
           }, 2000)
-          console.log(data)
           context.commit('SET_ITEMS', data)
           // this.$router.push({ path: '/products' })
         })
@@ -76,7 +75,6 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           context.commit('SET_DETAIL', data)
         })
         .catch(err => {
@@ -112,7 +110,6 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           context.dispatch('fetchItem', { message: 'Edit Success' })
           // this.$router.push({ path: '/products' })
         })

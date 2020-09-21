@@ -1,8 +1,7 @@
 <template>
   <div class="col-9">
     <div class="container">
-      {{ editedItem }}
-      <h2>Edit Your Item Here ({{ editedItem.name }})</h2>
+      <h2>Edit Your Item ({{ editedItem.name }}) Here</h2>
       <form class="form-horizontal">
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Name:</label>
@@ -32,6 +31,7 @@
   </div>
 </template>
 <script>
+import instanceAPI from '../api/instanceAPI.js'
 export default {
   name: 'EditItem',
   data () {
@@ -52,9 +52,21 @@ export default {
   },
   created () {
     this.$store.dispatch('fetchDetailItem', { id: this.$route.params.id })
-    this.item.name = this.editedItem.name
-    this.item.price = this.editedItem.price
-    this.item.stock = this.editedItem.stock
+    instanceAPI({
+      method: 'get',
+      url: `https://ecommerge-cms.herokuapp.com/items/${this.$route.params.id}`,
+      headers: {
+        access_token: localStorage.getItem('access_token')
+      }
+    })
+      .then(({ data }) => {
+        this.item.name = data.name
+        this.item.price = data.price
+        this.item.stock = data.stock
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   computed: {
     editedItem () {

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-9">
+  <div class="col-9 my-2">
     <div class="row">
       <ItemCard
       v-for="item in items"

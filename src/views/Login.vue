@@ -37,7 +37,7 @@ export default {
     login () {
       instanceAPI({
         method: 'POST',
-        url: 'https://ecommerge-cms.herokuapp.com/login',
+        url: 'https://ecommerge-cms.herokuapp.com/admin/login',
         data: {
           email: this.user.email,
           password: this.user.password

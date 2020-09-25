@@ -1,5 +1,8 @@
 <template>
-  <div class="col-9">
+  <div class="col-9 my-4">
+    <div class="">
+      <h2>List Of All Product <a href="/outstock-list" class="badge badge-secondary">Refresh</a></h2>
+    </div>
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -27,8 +30,7 @@ export default {
   },
   computed: {
     filteredItem () {
-      const filteredItem = this.$store.state.items.filter(item => item.stock < 100)
-      return filteredItem
+      return this.$store.state.items
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="col-3">
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" :src="item.image_url" alt="Card image cap">
+  <div class="col-3 my-2">
+    <div class="card" style="width: 18rem;  height: 25rem;">
+      <img class="card-img-top" :src="item.image_url" width="100px" height="200px">
       <div class="card-body">
         <p class="card-text h3">{{ item.name }}</p>
         <p class="h5">Price : {{ price }}</p>

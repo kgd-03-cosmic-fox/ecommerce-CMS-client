@@ -53,7 +53,7 @@ export default {
     this.$store.dispatch('fetchDetailItem', { id: this.$route.params.id })
     instanceAPI({
       method: 'get',
-      url: `https://ecommerge-cms.herokuapp.com/items/${this.$route.params.id}`,
+      url: `https://ecommerge-cms.herokuapp.com/admin/items/${this.$route.params.id}`,
       headers: {
         access_token: localStorage.getItem('access_token')
       }

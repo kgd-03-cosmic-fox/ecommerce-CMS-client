@@ -28,7 +28,7 @@ export default new Vuex.Store({
     fetchItem (context, payload) {
       instanceAPI({
         method: 'get',
-        url: 'https://ecommerge-cms.herokuapp.com/items',
+        url: 'https://ecommerge-cms.herokuapp.com/admin/items',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -48,7 +48,7 @@ export default new Vuex.Store({
     addItems (context, payload) {
       instanceAPI({
         method: 'POST',
-        url: 'https://ecommerge-cms.herokuapp.com/items',
+        url: 'https://ecommerge-cms.herokuapp.com/admin/items',
         data: {
           name: payload.name,
           image_url: payload.image_url,
@@ -69,7 +69,7 @@ export default new Vuex.Store({
     fetchDetailItem (context, payload) {
       instanceAPI({
         method: 'get',
-        url: `https://ecommerge-cms.herokuapp.com/items/${payload.id}`,
+        url: `https://ecommerge-cms.herokuapp.com/admin/items/${payload.id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -84,7 +84,7 @@ export default new Vuex.Store({
     deleteItem (context, payload) {
       instanceAPI({
         method: 'DELETE',
-        url: `https://ecommerge-cms.herokuapp.com/items/${payload.id}`,
+        url: `https://ecommerge-cms.herokuapp.com/admin/items/${payload.id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -99,7 +99,7 @@ export default new Vuex.Store({
     editItem (context, payload) {
       instanceAPI({
         method: 'put',
-        url: `https://ecommerge-cms.herokuapp.com/items/${payload.id}`,
+        url: `https://ecommerge-cms.herokuapp.com/admin/items/${payload.id}`,
         data: {
           name: payload.item.name,
           price: payload.item.price,
